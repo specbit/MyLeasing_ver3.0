@@ -41,14 +41,44 @@ namespace MyLeasing.Web.Data
         {
             _context.Owners.Add(new Owner
             {
-                Document = _random.Next(100000000).ToString(),
+                Document = _random.Next(10000000, 100000000).ToString(),    //Returns a 8 lenght int
                 FirstName = name,
                 LastName = surname,
-                FixedPhone = "92" + _random.Next(10000000).ToString(),
-                CellPhone = "21" + _random.Next(10000000).ToString(),
+                FixedPhone = "92" + _random.Next(10000000, 100000000).ToString(),
+                CellPhone = "21" + _random.Next(10000000, 100000000).ToString(),
+                Address = "Rua " + GenerateRandStr(),
             });
 
             //await _context.AddAsync();
+        }
+
+        private string GenerateRandStr()
+        {
+            // Creating object of random class
+            Random rand = new Random();
+
+            // Choosing the size of string
+            // Using Next() string
+            int stringlen = rand.Next(4, 10);
+            int randValue;
+            string str = "";
+            char letter;
+
+            for (int i = 0; i < stringlen; i++)
+            {
+
+                // Generating a random number.
+                randValue = rand.Next(0, 26);
+
+                // Generating random character by converting
+                // the random number into character.
+                letter = Convert.ToChar(randValue + 65);
+
+                // Appending the letter to string.
+                str = str + letter;
+            }
+
+            return str;
         }
     }
 }
